@@ -11,7 +11,7 @@ def fetch_data(data) :
 
     # Individual Name List in Chatting following Account
     df_chatting_by_account = df[df["status"]=="Chatting"].groupby("account")[["name", "country"]].apply(lambda x: x.to_dict(orient='list')).to_dict()
-    print(df_chatting_names_by_account)
+    # print(df_chatting_names_by_account)
 
     # Individual Name List in Waiting following Account
     df_waiting_by_account = df[df["status"]=="Waiting"].groupby("account")[["name", "country"]].apply(lambda x: x.to_dict(orient='list')).to_dict()
