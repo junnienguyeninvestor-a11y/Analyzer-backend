@@ -6,6 +6,7 @@ from .lib.yesterday_data import get_yesterday_stats
 from .lib.filter import fetch_data
 from .lib.handle_sheet import add_new_content, update_status_content, record_daily_data
 from .lib.use_service_account import get_sheet_dict, fetch_data_from_sheet
+from .lib.controller import data_to_pd
 
 bp = Blueprint("api", __name__)
 CORS(bp) # Enable CORS for all routes
@@ -88,7 +89,11 @@ def update_status():
     res = update_status_content(keyword, new_value, sheet1)
     return res
 
-    
+@bp.route("/api/getscenario", methods=["GET"])
+def get_scenario():
+    data = get_sheet_dict(3).get_all_values()
+    scenario_dataframe = data_to_pd(data,["No","scenario"],2).to_dict()
+    return scenario_dataframe
 
 def register_routes(app):
     app.register_blueprint(bp)

@@ -1,3 +1,7 @@
 service_account.json
 apiCredential.json
 .env
+__pycache__
+/__pycache__
+app/lib/credential.json
+venv

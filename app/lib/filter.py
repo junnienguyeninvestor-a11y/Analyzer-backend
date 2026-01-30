@@ -1,4 +1,5 @@
 import pandas as pd
+from .controller import pd_to_dict
 
 # Fetch Data 
 def fetch_data(data) :
@@ -10,8 +11,8 @@ def fetch_data(data) :
     df["date"] = pd.to_datetime(df["date"], format="%m/%d/%Y", errors="coerce")
 
     # Individual Name List in Chatting following Account
-    df_chatting_by_account = df[df["status"]=="Chatting"].groupby("account")[["name", "country"]].apply(lambda x: x.to_dict(orient='list')).to_dict()
-    # print(df_chatting_names_by_account)
+    # df_chatting_by_account = df[df["status"]=="Chatting"].groupby("account")[["name", "country"]].apply(lambda x: x.to_dict(orient='list')).to_dict()
+    df_chatting_by_account = pd_to_dict(df, "status", "Chatting", "account", ["name", "country"])
 
     # Individual Name List in Waiting following Account
     df_waiting_by_account = df[df["status"]=="Waiting"].groupby("account")[["name", "country"]].apply(lambda x: x.to_dict(orient='list')).to_dict()
